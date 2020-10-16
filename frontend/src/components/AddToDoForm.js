@@ -3,8 +3,7 @@ import axios from "axios";
 
 export default function AddToDoForm() {
     const [description, setDescription] = useState("");
-    const [status, setStatus] = useState("");
-    const selectValues = ["OPEN", "IN_PROGRESS", "DONE"];
+    const [status, setStatus] = useState("OPEN");
 
     return <form>
         <label>Add new description
@@ -17,7 +16,7 @@ export default function AddToDoForm() {
                 <option value="DONE">DONE</option></select>
         </label>
 
-        <button disabled={description.length === 0 || status.length === 0} type="button" onClick={() => {
+        <button disabled={description.length === 0} type="button" onClick={() => {
             sendRequest({description, status})
             setDescription("");
             setStatus("");
