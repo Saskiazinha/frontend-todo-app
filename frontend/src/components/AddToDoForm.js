@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-export default function AddToDoForm() {
-    const [description, setDescription] = useState("");
-    const [status, setStatus] = useState("OPEN");
+
+export default function AddToDoForm(props) {
+   const {setStatus, setDescription, description, status}=props
 
     return <form>
         <label>Add new description
@@ -19,7 +19,7 @@ export default function AddToDoForm() {
         <button disabled={description.length === 0} type="button" onClick={() => {
             sendRequest({description, status})
             setDescription("");
-            setStatus("");
+            setStatus("OPEN");
         }}>Enter</button>
     </form>
 }

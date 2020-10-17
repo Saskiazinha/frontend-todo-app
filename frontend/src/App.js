@@ -8,6 +8,8 @@ function App() {
   const url = "/api/todo";
   const [toDoList, setToDoList] = useState([]);
   const [deletedItem, setDeletedItem] = useState(false);
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState("OPEN");
 
   useEffect(() => {
       axios.get(url)
@@ -16,16 +18,19 @@ function App() {
           .catch(error => console.log(error));
   }, [toDoList, deletedItem]);
 
+
     return (
     <div>
         {toDoList.map(item =>
             <div key = {item.id}>
                 {item.description} {item.status}
-                {/*<button onClick={() => {changeStatusOfItem({item})}}>Change status</button>*/}
+                 <button onClick={() => {changeStatusOfItem(item, setStatus, status)}}>Change status</button>
                  <button onClick={() => {deleteItem(item.id); setDeletedItem(!deletedItem)}}>Delete</button>
             </div>)}
         <div>
-          <AddToDoForm/>
+          <AddToDoForm
+          setStatus={setStatus} setDescription={setDescription} description={description} status={status}
+          />
         </div>
     </div>
   );
